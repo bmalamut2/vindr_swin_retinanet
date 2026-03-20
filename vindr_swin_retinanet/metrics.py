@@ -216,7 +216,10 @@ def compute_froc_auc(
         fps.append(max_fps_per_image)
         sensitivities.append(sensitivities[-1])
 
-    auc = float(np.trapz(y=sensitivities, x=fps) / max_fps_per_image)
+    integrate_trapezoid = getattr(np, "trapezoid", None)
+    if integrate_trapezoid is None:
+        integrate_trapezoid = np.trapz
+    auc = float(integrate_trapezoid(y=sensitivities, x=fps) / max_fps_per_image)
 
     sensitivity_at = {}
     for operating_point in (0.5, 1.0, 2.0, 4.0, 8.0):
