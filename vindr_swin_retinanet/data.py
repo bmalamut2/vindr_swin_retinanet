@@ -218,6 +218,12 @@ def load_test_annotations(annotations_path: Path, image_dir: Path) -> dict[str, 
     with annotations_path.open("r", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
+            if row["class_name"] == NO_FINDING_CLASS_NAME:
+                continue
+            if row["class_name"] not in CLASS_TO_LABEL:
+                continue
+            if not row["x_min"] or not row["y_min"] or not row["x_max"] or not row["y_max"]:
+                continue
             grouped[row["image_id"]].append(row)
 
     records: dict[str, dict[str, Any]] = {}

@@ -17,13 +17,14 @@ from torchvision.ops.feature_pyramid_network import LastLevelP6P7
 
 
 class SwinLBackboneFPN(nn.Module):
-    def __init__(self, pretrained: bool = True) -> None:
+    def __init__(self, image_size: int, pretrained: bool = True) -> None:
         super().__init__()
         self.body = timm.create_model(
             "swin_large_patch4_window12_384.ms_in22k_ft_in1k",
             pretrained=pretrained,
             features_only=True,
             out_indices=(1, 2, 3),
+            img_size=(image_size, image_size),
         )
         self.in_channels_list = list(self.body.feature_info.channels())
         self.fpn = FeaturePyramidNetwork(
@@ -50,7 +51,7 @@ def build_model(
     image_size: int,
     pretrained_backbone: bool = True,
 ) -> RetinaNet:
-    backbone = SwinLBackboneFPN(pretrained=pretrained_backbone)
+    backbone = SwinLBackboneFPN(image_size=image_size, pretrained=pretrained_backbone)
     anchor_generator = AnchorGenerator(
         sizes=(
             (20, 25, 32),

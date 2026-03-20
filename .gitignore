@@ -3,3 +3,5 @@
 /__pycache__
 /vindr_swin_retinanet/__pycache__
 /README.md
+/.cache/vindr_swin_retinanet
+/outputs
