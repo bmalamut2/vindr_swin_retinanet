@@ -1,0 +1,24 @@
+name: vindr-swin-retinanet
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pytorch=2.5.*
+  - torchvision=0.20.*
+  - pytorch-cuda=12.1
+  - numpy
+  - pandas
+  - pillow
+  - pyyaml
+  - scikit-learn
+  - tqdm
+  - rich
+  - tensorboard
+  - pip
+  - pip:
+      - timm>=1.0.15
+      - torchmetrics>=1.6.0
+      - pycocotools>=2.0.8
+      - iterative-stratification>=0.1.9

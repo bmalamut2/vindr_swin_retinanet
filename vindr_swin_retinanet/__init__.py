@@ -1,0 +1,8 @@
+from .constants import CLASS_TO_LABEL, LABEL_TO_CLASS, LOCAL_CLASS_NAMES, NUM_CLASSES
+
+__all__ = [
+    "CLASS_TO_LABEL",
+    "LABEL_TO_CLASS",
+    "LOCAL_CLASS_NAMES",
+    "NUM_CLASSES",
+]
